@@ -2,19 +2,12 @@ package Fundamentals;
 import libraries.*;
 public class BasicProgrammingModel {
     public static void main(String[] args) {
-        boolean isEqualed = true;
-        for (int i = 0; i < args.length; i++) {
-            if (i > 0 && !args[i].equals(args[i-1])) {
-                StdOut.println(i);
-                isEqualed = false;
-            }
-        }
-
-        if (isEqualed) {
-            StdOut.println("equal");
+        double x = Double.parseDouble(args[0]), y = Double.parseDouble(args[1]);
+        if (x > 0 && x < 1 && y > 0 && y < 1) {
+            StdOut.println("true");
         }
         else {
-            StdOut.println("not equal");
+            StdOut.println("false");
         }
     }
 }
