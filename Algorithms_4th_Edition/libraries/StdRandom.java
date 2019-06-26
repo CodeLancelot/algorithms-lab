@@ -45,7 +45,7 @@
  *
  ******************************************************************************/
 
-package Algorithms_4th_Edition.libraries;
+package libraries;
 
 import java.util.Random;
 

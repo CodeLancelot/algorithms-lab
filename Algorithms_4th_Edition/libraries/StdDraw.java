@@ -22,7 +22,7 @@
  *
  ******************************************************************************/
 
-package Algorithms_4th_Edition.libraries;
+package libraries;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

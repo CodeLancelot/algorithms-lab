@@ -7,7 +7,7 @@
  *
  ******************************************************************************/
 
-package Algorithms_4th_Edition.libraries;
+package libraries;
 
 import java.io.BufferedInputStream;
 import java.io.File;

@@ -31,7 +31,7 @@
  *
  ******************************************************************************/
 
-package Algorithms_4th_Edition.libraries;
+package libraries;
 
 /**
  *  The {@code StdStats} class provides static methods for computing

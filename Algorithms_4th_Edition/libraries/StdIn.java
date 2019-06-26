@@ -7,7 +7,7 @@
  *
  ******************************************************************************/
 
-package Algorithms_4th_Edition.libraries;
+package libraries;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;

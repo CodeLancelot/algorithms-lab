@@ -3,7 +3,7 @@ package Fundamentals;
 import libraries.*;
 
 public class Tools {
-    public static void printIntArray(int[] arr) {
+    public static <T> void printArray(T[] arr) {
         StdOut.print('[');
         for (int i = 0; i < arr.length; i++) {
             StdOut.print(arr[i]);
@@ -14,7 +14,7 @@ public class Tools {
         StdOut.print(']');
     }
 
-    public static void printTwoDimensionalIntArray(int[][] arr) {
+    public static <T> void printTwoDimensionalArray(T[][] arr) {
         int m = arr.length;
         int n = arr[0].length;
         for (int i = 0; i < m; i++) {
