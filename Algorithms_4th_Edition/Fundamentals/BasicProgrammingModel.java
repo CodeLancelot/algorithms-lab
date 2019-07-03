@@ -1,35 +1,53 @@
 package Fundamentals;
 
-import java.awt.Point;
-
 import libraries.*;
 
 public class BasicProgrammingModel {
     public static void main(String[] args) {
-        diceSimulation(Integer.parseInt(args[0]));
+        shuffleTest();
     }
 
-    public static void diceSimulation (int N) {
-        //N is at least at ten million level, I met the request when first trying 60000000
-        int SIDES = 6;
-        double[] dist = new double[2 * SIDES + 1];
-        for (int i = 1; i <= SIDES; i++) {
-            for (int j = 1; j <= SIDES; j++)
-                dist[i + j]++;
+    public static void shuffleTest() {
+        int M = 10, N = 500;
+        int[] a = new int[M];
+        int[][] counts = new int[M][M];
+
+        //N shuffle
+        for (int round = 0; round < N; round++) {
+            initArray(a);
+            shuffle(a);
+            for (int i = 0; i < M; i++) {
+                counts[i][a[i]]++;
+            }
         }
-        for (int k = 2; k <= 2 * SIDES; k++)
-            dist[k] /= 36.0;
-        Tools.printArray(dist, 3);
+        Tools.printArray(a);
+        Tools.printTwoDimensionalArray(counts);
+    }
 
+    private static void initArray(int[] a) {
+        for (int i = 0, len = a.length; i < len; i++) {
+            a[i] = i;
+        }
+    }
 
-        double[] test = new double[2 * SIDES + 1];
+    public static void shuffle(int[] a) {
+        int N = a.length;
         for (int i = 0; i < N; i++) {
-            int dice1 = StdRandom.uniform(SIDES) + 1;
-            int dice2 = StdRandom.uniform(SIDES) + 1;
-            test[dice1 + dice2]++;
+            // Exchange a[i] with random element in a[i..N-1]
+            int r = i + StdRandom.uniform(N - i);
+            int temp = a[i];
+            a[i] = a[r];
+            a[r] = temp;
         }
-        for (int k = 2; k <= 2 * SIDES; k++)
-            test[k] /= N;
-        Tools.printArray(test, 3);
+    }
+
+    public static void badShuffling(int[] a) {
+        int N = a.length;
+        for (int i = 0; i < N; i++) {
+            int r = StdRandom.uniform(N);
+            int temp = a[i];
+            a[i] = a[r];
+            a[r] = temp;
+        }
     }
 }
