@@ -4,17 +4,50 @@ import libraries.*;
 
 public class BasicProgrammingModel {
     public static void main(String[] args) {
-        while (StdIn.hasNextLine()) {
-            String line = StdIn.readLine();
-            StdOut.println(mystery(line));
+        shuffleTest();
+    }
+
+    public static void shuffleTest() {
+        int M = 10, N = 500;
+        int[] a = new int[M];
+        int[][] counts = new int[M][M];
+
+        //N shuffle
+        for (int round = 0; round < N; round++) {
+            initArray(a);
+            shuffle(a);
+            for (int i = 0; i < M; i++) {
+                counts[i][a[i]]++;
+            }
+        }
+        Tools.printArray(a);
+        Tools.printTwoDimensionalArray(counts);
+    }
+
+    private static void initArray(int[] a) {
+        for (int i = 0, len = a.length; i < len; i++) {
+            a[i] = i;
         }
     }
 
-    private static String mystery(String s) {
-        int N = s.length();
-        if (N <= 1) return s;
-        String a = s.substring(0, N / 2);
-        String b = s.substring(N / 2, N);
-        return mystery(b) + mystery(a);
+    public static void shuffle(int[] a) {
+        int N = a.length;
+        for (int i = 0; i < N; i++) {
+            // Exchange a[i] with random element in a[i..N-1]
+            int r = i + StdRandom.uniform(N - i);
+            int temp = a[i];
+            a[i] = a[r];
+            a[r] = temp;
+        }
+    }
+
+    public static void badShuffling(int[] a) {
+        int N = a.length;
+        for (int i = 0; i < N; i++) {
+            int r = StdRandom.uniform(N);
+            int temp = a[i];
+            a[i] = a[r];
+            a[r] = temp;
+        }
     }
 }
