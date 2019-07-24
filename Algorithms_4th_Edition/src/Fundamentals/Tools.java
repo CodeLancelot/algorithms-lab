@@ -3,7 +3,8 @@ package Fundamentals;
 import libraries.*;
 
 public class Tools {
-    public static void printArray(int[] arr) {
+    static <T> void printArray(T[] arr) {
+        StdOut.println();
         StdOut.print('[');
         for (int i = 0; i < arr.length; i++) {
             StdOut.print(arr[i]);
@@ -14,7 +15,8 @@ public class Tools {
         StdOut.println(']');
     }
 
-    public static void printArray(double[] arr, int precision) {
+    static void printArray(double[] arr, int precision) {
+        StdOut.println();
         StdOut.print('[');
         for (int i = 0; i < arr.length; i++) {
             String formatStr = "%." + precision + 'f';
@@ -26,60 +28,38 @@ public class Tools {
         StdOut.println(']');
     }
 
-    public static void printArray(String[] arr) {
-        StdOut.print('[');
-        for (int i = 0; i < arr.length; i++) {
-            StdOut.print(arr[i]);
-            if (i != arr.length - 1) {
-                StdOut.print(' ');
-            }
-        }
-        StdOut.println(']');
-    }
-
-    public static void printTwoDimensionalArray(int[][] arr) {
-        int m = arr.length;
-        int n = arr[0].length;
-        for (int i = 0; i < m; i++) {
+    static <T> void printMatrix(T[][] matrix) {
+        int count = matrix[0].length;
+        StdOut.println();
+        StdOut.println();
+        for (T[] row : matrix) {
             StdOut.print('(');
-            for (int j = 0; j < n; j++) {
-                StdOut.print(arr[i][j]);
-                if (j < n - 1) {
-                    StdOut.print(", ");
+            for (int col = 0; col < count; col++) {
+                StdOut.print(row[col]);
+                if (col < count - 1) {
+                    StdOut.print(" ");
                 }
             }
             StdOut.println(')');
         }
+        StdOut.println();
     }
 
-    public static void printTwoDimensionalArray(double[][] arr, int precision) {
-        int m = arr.length;
-        int n = arr[0].length;
-        for (int i = 0; i < m; i++) {
+    static void printMatrix(double[][] matrix, int precision) {
+        int count = matrix[0].length;
+        StdOut.println();
+        StdOut.println();
+        for (double[] row : matrix) {
             StdOut.print('(');
-            for (int j = 0; j < n; j++) {
+            for (int col = 0; col < count; col++) {
                 String formatStr = "%." + precision + 'f';
-                StdOut.printf(formatStr, arr[i][j]);
-                if (j < n - 1) {
-                    StdOut.print(", ");
+                StdOut.printf(formatStr, row[col]);
+                if (col < count - 1) {
+                    StdOut.print(" ");
                 }
             }
             StdOut.println(')');
         }
-    }
-
-    public static void printTwoDimensionalArray(String[][] arr) {
-        int m = arr.length;
-        int n = arr[0].length;
-        for (int i = 0; i < m; i++) {
-            StdOut.print('(');
-            for (int j = 0; j < n; j++) {
-                StdOut.print(arr[i][j]);
-                if (j < n - 1) {
-                    StdOut.print(", ");
-                }
-            }
-            StdOut.println(')');
-        }
+        StdOut.println();
     }
 }
