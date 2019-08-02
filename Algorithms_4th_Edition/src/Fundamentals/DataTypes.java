@@ -6,26 +6,40 @@ public class DataTypes {
     //the bag, the queue, and the stack
 
     public static void main(String[] args) {
-        Stack<String> stack = new Stack<>();
-        String str = "0 1 2 3 4 5 6 7 8 9";
-        String[] arr = str.split(" ");
+        Queue<String> operandQueue = new Queue<String>();
+        Queue<String> operatorQueue = new Queue<String>();
+        Stack<String> iStack = new Stack<String>();
+        Stack<String> oStack = new Stack<String>();
+        while (!StdIn.isEmpty()) { // Read token, push if operator.
+            String s = StdIn.readString();
+            iStack.push(s);
+//            else if (s.equals(")"))
+        }
 
-        int i = 0, len = arr.length;
-        while (!StdIn.isEmpty()) {
-            String cmd = StdIn.readString();
-            if ("push".equals(cmd) && i < len) {
-                stack.push(arr[i++]);
-            } else {
-                String s = stack.pop();
-                StdOut.println(s);
+        for (String s : iStack) {
+            StdOut.print(s + ' ');
+        }
+
+        while (!iStack.isEmpty()) {
+            String str = iStack.pop();
+            if (str.equals(")")) {
+                oStack.push(str);
             }
-            StdOut.print("Stack: ");
-            for (String s : stack) {
-                StdOut.print(s + " ");
+            else if (str.equals("+") || str.equals("-") || str.equals("*") || str.equals("/")) {
+                operatorQueue.enqueue(str);
+                oStack.push(str);
             }
-            StdOut.println();
-            if (stack.isEmpty()) {
-                break;
+            else {
+                if (operatorQueue.size() == 0) {
+                    oStack.push(str);
+                }
+                else {
+                    operandQueue.enqueue(str);
+                    String oprStr = operatorQueue.dequeue();
+                    oStack.push(oprStr);
+                    oStack.push(str);
+                    oStack.push("(");
+                }
             }
         }
     }
