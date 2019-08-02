@@ -7,31 +7,26 @@ public class DataTypes {
 
     public static void main(String[] args) {
         Stack<String> stack = new Stack<>();
-        String str = "a b c d e f g h i j k l";
+        String str = "0 1 2 3 4 5 6 7 8 9";
         String[] arr = str.split(" ");
-        for (String s : arr) {
-            stack.push(s);
-        }
-        for (String s : stack) {
-            StdOut.print(s + ' ');
-        }
 
-        Queue<Integer> queue = new Queue<>();
-        int[] intArr = {1 ,2,3,4,5,6,7,8,9,10};
-        for (int i : intArr) {
-            queue.enqueue(i);
-        }
-        for (int i : queue) {
-            StdOut.print(i);
-            StdOut.print(' ');
-        }
-
-        Bag<String> bag = new Bag<>();
-        for (String s : arr) {
-            bag.add(s);
-        }
-        for (String s : bag) {
-            StdOut.print(s + ' ');
+        int i = 0, len = arr.length;
+        while (!StdIn.isEmpty()) {
+            String cmd = StdIn.readString();
+            if ("push".equals(cmd) && i < len) {
+                stack.push(arr[i++]);
+            } else {
+                String s = stack.pop();
+                StdOut.println(s);
+            }
+            StdOut.print("Stack: ");
+            for (String s : stack) {
+                StdOut.print(s + " ");
+            }
+            StdOut.println();
+            if (stack.isEmpty()) {
+                break;
+            }
         }
     }
 }
