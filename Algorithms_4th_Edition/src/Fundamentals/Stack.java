@@ -34,6 +34,10 @@ public class Stack<Item> implements Iterable<Item> {
         return item;
     }
 
+    public Item peek() {
+        return first.item;
+    }
+
     public Iterator<Item> iterator() {
         return new ListIterator();
     }
