@@ -6,43 +6,20 @@ public class DataTypes {
     //the bag, the queue, and the stack
 
     public static void main(String[] args) {
-        int operandCount = 0, operatorCount = 0;
-        Stack<String> iStack = new Stack<>();
+        Stack<String> vStack = new Stack<>();
         Stack<String> oStack = new Stack<>();
         while (!StdIn.isEmpty()) {
-            String s = StdIn.readString();
-            iStack.push(s);
-        }
-
-        for (String s : iStack) {
-            StdOut.print(s + ' ');
-        }
-
-        while (!iStack.isEmpty()) {
-            String str = iStack.pop();
+            String str = StdIn.readString();
             if (str.equals(")")) {
-                oStack.push(str);
-                if (operandCount > 0) {
-                    operandCount--;
-                }
+                String value1 = vStack.pop(), value2 = vStack.pop(), operator = oStack.pop();
+                String value = "(" + value2 + " " + operator + " " + value1 + ")";
+                vStack.push(value);
             } else if (str.equals("+") || str.equals("-") || str.equals("*") || str.equals("/")) {
                 oStack.push(str);
-                operatorCount++;
             } else {
-                oStack.push(str);
-                operandCount++;
-                if (operandCount == 2) {
-                    while (operatorCount > 0) {
-                        oStack.push("(");
-                        operatorCount--;
-                    }
-                    operandCount = 0;
-                }
+                vStack.push(str);
             }
         }
-        StdOut.println();
-        for (String s : oStack) {
-            StdOut.print(s + ' ');
-        }
+        StdOut.println(vStack.pop());
     }
 }
