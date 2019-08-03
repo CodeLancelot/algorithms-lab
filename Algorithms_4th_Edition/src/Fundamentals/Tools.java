@@ -62,4 +62,94 @@ public class Tools {
         }
         StdOut.println();
     }
+
+    static String convertInfixToPostfix(String infix) {
+        String[] arr = infix.split("\\s+");
+        String postfix = "";
+        Stack<String> oStack = new Stack<>();
+        for (String str : arr) {
+            if (str.equals("(")) {
+                oStack.push("(");
+            } else if (str.equals(")")) {
+                String op = oStack.pop();
+                while (!op.equals("(")) {
+                    postfix += op + " ";
+                    op = oStack.pop();
+                }
+            } else if (isOperator(str)) {
+                while (oStack.size() != 0) {
+                    int p1 = precedence(str), p2 = precedence(oStack.peek());
+                    if (p1 > p2) {
+                        break;
+                    } else {
+                        postfix += oStack.pop() + " ";
+                    }
+                }
+                oStack.push(str);
+            } else {
+                postfix += str + " ";
+            }
+        }
+
+        while (oStack.size() != 0) {
+            postfix += oStack.pop() + " ";
+        }
+        return postfix;
+    }
+
+    private static int precedence(String operator) {
+        int precedence = 0;
+        switch (operator) {
+            case "+":
+            case "-":
+                precedence = 1;
+                break;
+            case "*":
+            case "/":
+                precedence = 3;
+                break;
+            case "^":
+                precedence = 5;
+                break;
+        }
+        return precedence;
+    }
+
+    static boolean isOperator(String str) {
+        return (str.equals("+") || str.equals("-") || str.equals("*") || str.equals("/") || str.equals("^"));
+    }
+
+    static double evaluateBinaryOperation(String operator, double leftOperand, double rightOperand) {
+        double result = Math.PI;
+        switch (operator) {
+            case "+":
+                result = leftOperand + rightOperand;
+                break;
+            case "-":
+                result = leftOperand - rightOperand;
+                break;
+            case "*":
+                result = leftOperand * rightOperand;
+                break;
+            case "/":
+                result = leftOperand / rightOperand;
+                break;
+        }
+        return result;
+    }
+
+    static double evaluatePostfix(String postfix) {
+        String[] arr = postfix.split("\\s+");
+        Stack<Double> vStack = new Stack<>();
+        for (String str : arr) {
+            if (isOperator(str)) {
+                double ro = vStack.pop(), lo = vStack.pop();
+                double v = evaluateBinaryOperation(str, lo, ro);
+                vStack.push(v);
+            } else {
+                vStack.push(Double.parseDouble(str));
+            }
+        }
+        return vStack.pop();
+    }
 }
