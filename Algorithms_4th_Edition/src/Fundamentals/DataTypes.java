@@ -6,41 +6,47 @@ public class DataTypes {
     //the bag, the queue, and the stack
 
     public static void main(String[] args) {
-        String line = "10 9 8 7 6 5 4 3 2 1";
-        LinkedList<String> list = new LinkedList<>();
+        String line = "10 9 8 17 6 15 4 3 22 1";
+        LinkedList<Integer> list = new LinkedList<>();
+        StdOut.println("max: " + max(list.first));
+        StdOut.println("max: " + maxRecursiveSolution(list.first));
 
         String[] arr = line.split("\\s+");
         for (String str : arr) {
-            list.insertHead(str);
+            list.insertHead(Integer.parseInt(str));
         }
         list.print();
-        for (String str : args) {
-            int index = Integer.parseInt(str);
-            list.removeAfter(list.getNode(index));
-            list.print();
-        }
-        list.insertHead("a");
-        list.insertAfter(list.getNode(1), list.createNode("a"));
-        list.insertAfter(list.getNode(2), list.createNode("a"));
-        list.insertAfter(list.getNode(6), list.createNode("b"));
-        list.insertAfter(list.getNode(11), list.createNode("a"));
-        list.insertAfter(list.getNode(15), list.createNode("a"));
-        list.print();
-        remove(list, "a");
-        list.print();
+        StdOut.println("max: " + max(list.first));
+        StdOut.println("max: " + maxRecursiveSolution(list.first));
     }
 
-    static void remove(LinkedList<String> list, String key) {
-        Node node = list.first;
-        while (node != null) {
-            if (key.equals(node.item)) {
-                Node next = node.next;
-                list.removeNode(node);
-                node = next;
+    static int max(Node<Integer> first) {
+        int max = 0;
+        if (first == null) {
+            return max;
+        }
+        Node<Integer> node = first.next;
+        max = first.item;
+        while(node != null) {
+            if (node.item > max) {
+                max = node.item;
             }
-            else {
-                node = node.next;
+            node = node.next;
+        }
+        return max;
+    }
+
+    static int maxRecursiveSolution(Node<Integer> first) {
+        int max = 0;
+        if (first == null) {
+            return max;
+        }
+        else {
+            max = maxRecursiveSolution(first.next);
+            if (max < first.item) {
+                max =  first.item;
             }
+            return max;
         }
     }
 }
