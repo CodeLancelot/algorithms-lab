@@ -38,6 +38,39 @@ class LinkedList<Type> {
         }
     }
 
+    Node getNode(int k) {
+        if (1 <= k && k <= N) {
+            int i = 1;
+            for (Node node = first; node != null; node = node.next) {
+                if (i == k) {
+                    return node;
+                }
+                i++;
+            }
+        }
+        return null;
+    }
+
+    void removeAfter(Node node) {
+        if (node != null && node.next != null) {
+            node.next = node.next.next;
+        }
+    }
+
+    Node createNode(Type item) {
+        Node node = new Node();
+        node.item = item;
+        return node;
+    }
+
+    void insertAfter(Node targetNode, Node newNode) {
+        if (targetNode != null && newNode != null) {
+            newNode.next = targetNode.next;
+            targetNode.next = newNode;
+            N++;
+        }
+    }
+
     void print() {
         for (Node node = first; node != null; node = node.next) {
             StdOut.print(node.item + " -> ");
