@@ -6,47 +6,41 @@ public class DataTypes {
     //the bag, the queue, and the stack
 
     public static void main(String[] args) {
-        String line = "10 9 8 17 6 15 4 3 22 1";
         LinkedList<Integer> list = new LinkedList<>();
-        StdOut.println("max: " + max(list.first));
-        StdOut.println("max: " + maxRecursiveSolution(list.first));
-
+        String line = "10 9 8 7 6 5 4 3 2 1";
         String[] arr = line.split("\\s+");
         for (String str : arr) {
             list.insertHead(Integer.parseInt(str));
         }
         list.print();
-        StdOut.println("max: " + max(list.first));
-        StdOut.println("max: " + maxRecursiveSolution(list.first));
+        list.first = reverseIterativeSolution(list.first);
+        list.print();
+        list.first = reverseRecursiveSolution(list.first);
+        list.print();
     }
 
-    static int max(Node<Integer> first) {
-        int max = 0;
-        if (first == null) {
-            return max;
-        }
-        Node<Integer> node = first.next;
-        max = first.item;
-        while(node != null) {
-            if (node.item > max) {
-                max = node.item;
+    static Node<Integer> reverseIterativeSolution(Node<Integer> first) {
+        if (first != null && first.next != null) {
+            Node<Integer> reverse = null;
+            while (first != null) {
+                Node<Integer> second = first.next;
+                first.next = reverse;
+                reverse = first;
+                first = second;
             }
-            node = node.next;
+            return reverse;
         }
-        return max;
+        return first;
     }
 
-    static int maxRecursiveSolution(Node<Integer> first) {
-        int max = 0;
-        if (first == null) {
-            return max;
+    static Node<Integer> reverseRecursiveSolution(Node<Integer> first) {
+        if (first == null || first.next == null) {
+            return first;
         }
-        else {
-            max = maxRecursiveSolution(first.next);
-            if (max < first.item) {
-                max =  first.item;
-            }
-            return max;
-        }
+        Node<Integer> second = first.next;
+        Node<Integer> reverse = reverseRecursiveSolution(second);
+        second.next = first;
+        first.next = null;
+        return reverse;
     }
 }
