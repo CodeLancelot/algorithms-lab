@@ -3,17 +3,12 @@ package Fundamentals;
 import libraries.*;
 
 class LinkedList<Type> {
-    private Node first;
+    Node<Type> first;
     private int N; // number of items
 
-    private class Node { // nested class to define nodes
-        Type item;
-        Node next;
-    }
-
     void insertHead(Type item) {
-        Node oldFirst = first;
-        first = new Node();
+        Node<Type> oldFirst = first;
+        first = new Node<>();
         first.item = item;
         first.next = oldFirst;
         N++;
@@ -49,6 +44,23 @@ class LinkedList<Type> {
             }
         }
         return null;
+    }
+
+    void removeNode(Node node) {
+        if (node != null) {
+            if (node == first) {
+                first = first.next;
+                N--;
+            } else {
+                for (Node currentNode = first; currentNode != null; currentNode = currentNode.next) {
+                    if (currentNode.next == node) {
+                        currentNode.next = currentNode.next.next;
+                        N--;
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     void removeAfter(Node node) {
