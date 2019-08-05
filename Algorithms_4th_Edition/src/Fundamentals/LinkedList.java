@@ -6,6 +6,14 @@ class LinkedList<Type> {
     Node<Type> first;
     private int N; // number of items
 
+    int size() {
+        return N;
+    }
+
+    boolean isEmpty() {
+        return N == 0;
+    }
+
     void insertHead(Type item) {
         Node<Type> oldFirst = first;
         first = new Node<>();
@@ -88,5 +96,30 @@ class LinkedList<Type> {
             StdOut.print(node.item + " -> ");
         }
         StdOut.println("NULL");
+    }
+
+    static Node<Integer> reverseIterativeSolution(Node<Integer> first) {
+        if (first != null && first.next != null) {
+            Node<Integer> reverse = null;
+            while (first != null) {
+                Node<Integer> second = first.next;
+                first.next = reverse;
+                reverse = first;
+                first = second;
+            }
+            return reverse;
+        }
+        return first;
+    }
+
+    static Node<Integer> reverseRecursiveSolution(Node<Integer> first) {
+        if (first == null || first.next == null) {
+            return first;
+        }
+        Node<Integer> second = first.next;
+        Node<Integer> reverse = reverseRecursiveSolution(second);
+        second.next = first;
+        first.next = null;
+        return reverse;
     }
 }

@@ -6,41 +6,31 @@ public class DataTypes {
     //the bag, the queue, and the stack
 
     public static void main(String[] args) {
-        LinkedList<Integer> list = new LinkedList<>();
+        DoublyLinkedList<String> list = new DoublyLinkedList<>();
         String line = "10 9 8 7 6 5 4 3 2 1";
         String[] arr = line.split("\\s+");
         for (String str : arr) {
-            list.insertHead(Integer.parseInt(str));
+            list.insertHead(str);
+            list.insertTail(str);
         }
         list.print();
-        list.first = reverseIterativeSolution(list.first);
-        list.print();
-        list.first = reverseRecursiveSolution(list.first);
-        list.print();
-    }
 
-    static Node<Integer> reverseIterativeSolution(Node<Integer> first) {
-        if (first != null && first.next != null) {
-            Node<Integer> reverse = null;
-            while (first != null) {
-                Node<Integer> second = first.next;
-                first.next = reverse;
-                reverse = first;
-                first = second;
-            }
-            return reverse;
+        for (int i = 0; i < 5; i++) {
+            list.removeHead();
+            list.removeTail();
         }
-        return first;
-    }
+        list.print();
 
-    static Node<Integer> reverseRecursiveSolution(Node<Integer> first) {
-        if (first == null || first.next == null) {
-            return first;
-        }
-        Node<Integer> second = first.next;
-        Node<Integer> reverse = reverseRecursiveSolution(second);
-        second.next = first;
-        first.next = null;
-        return reverse;
+        list.insertAfter(10, "tail");
+        list.insertBefore(1,"head");
+        list.insertAfter(6, "a");
+        list.insertBefore(8,"b");
+        list.insertAfter(7, "c");
+        list.print();
+
+        list.removeNode(1);
+        list.removeNode(list.size());
+        list.removeNode(7);
+        list.print();
     }
 }
