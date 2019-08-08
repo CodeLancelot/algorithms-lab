@@ -6,31 +6,35 @@ public class DataTypes {
     //the bag, the queue, and the stack
 
     public static void main(String[] args) {
-        DoublyLinkedList<String> list = new DoublyLinkedList<>();
-        String line = "10 9 8 7 6 5 4 3 2 1";
-        String[] arr = line.split("\\s+");
-        for (String str : arr) {
-            list.insertHead(str);
-            list.insertTail(str);
+        int N = Integer.parseInt(args[0]);
+        int M = Integer.parseInt(args[1]);
+
+
+        CircularLinkedList<Integer> list = new CircularLinkedList<>();
+        list.print();
+//        Queue<Integer> queue = new Queue<>();
+        for (int i = 0; i < N; i++) {
+            list.insertRear(i);
         }
-        list.print();
+        list. print();
 
-        for (int i = 0; i < 5; i++) {
-            list.removeHead();
-            list.removeTail();
+        while (!list.isEmpty()) {
+            int i = 0;
+            while (i < M-1) {
+                i++;
+            }
+
+            StdOut.print(list.getNode(i).item + " ");
+            list.removeNode(i);
         }
-        list.print();
+        StdOut.println();
+//            queue.enqueue(i);
 
-        list.insertAfter(10, "tail");
-        list.insertBefore(1,"head");
-        list.insertAfter(6, "a");
-        list.insertBefore(8,"b");
-        list.insertAfter(7, "c");
-        list.print();
-
-        list.removeNode(1);
-        list.removeNode(list.size());
-        list.removeNode(7);
-        list.print();
+//        while (!queue.isEmpty()) {
+//            for (int i = 0; i < m-1; i++)
+//                queue.enqueue(queue.dequeue());
+//            StdOut.print(queue.dequeue() + " ");
+//        }
+//        StdOut.println();
     }
 }

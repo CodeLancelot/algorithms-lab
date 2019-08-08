@@ -3,14 +3,9 @@ package Fundamentals;
 import java.util.Iterator;
 
 public class Queue<Item> implements Iterable<Item> {
-    private Node first; // link to least recently added node
-    private Node last; // link to most recently added node
+    private Node<Item> first; // link to least recently added node
+    private Node<Item> last; // link to most recently added node
     private int N; // number of items on the queue
-
-    private class Node { // nested class to define nodes
-        Item item;
-        Node next;
-    }
 
     public boolean isEmpty() {
         return first == null;
@@ -21,8 +16,8 @@ public class Queue<Item> implements Iterable<Item> {
     }
 
     public void enqueue(Item item) { // Add item to the end of the list.
-        Node oldLast = last;
-        last = new Node();
+        Node<Item> oldLast = last;
+        last = new Node<Item>();
         last.item = item;
         last.next = null;
         if (isEmpty()) first = last;
@@ -43,7 +38,7 @@ public class Queue<Item> implements Iterable<Item> {
     }
 
     private class ListIterator implements Iterator<Item> {
-        private Node current = first;
+        private Node<Item> current = first;
 
         public boolean hasNext() {
             return current != null;

@@ -84,8 +84,8 @@ public class DoublyLinkedList<Type> {
     }
 
     private DoubleNode getNode(int k) {
-        if (1 <= k && k <= N) {
-            int i = 1;
+        if (0 <= k && k < N) {
+            int i = 0;
             for (DoubleNode node = head; node != null; node = node.next) {
                 if (i == k) {
                     return node;

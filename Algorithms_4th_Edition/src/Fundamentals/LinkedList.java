@@ -42,8 +42,8 @@ class LinkedList<Type> {
     }
 
     Node getNode(int k) {
-        if (1 <= k && k <= N) {
-            int i = 1;
+        if (0 <= k && k < N) {
+            int i = 0;
             for (Node node = first; node != null; node = node.next) {
                 if (i == k) {
                     return node;
