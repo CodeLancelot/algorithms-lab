@@ -9,32 +9,33 @@ public class DataTypes {
         int N = Integer.parseInt(args[0]);
         int M = Integer.parseInt(args[1]);
 
-
         CircularLinkedList<Integer> list = new CircularLinkedList<>();
         list.print();
-//        Queue<Integer> queue = new Queue<>();
+
         for (int i = 0; i < N; i++) {
             list.insertRear(i);
         }
-        list. print();
+        list.print();
 
+        int nodeIndex = 0, numberOff = 0;
         while (!list.isEmpty()) {
-            int i = 0;
-            while (i < M-1) {
-                i++;
+            if (numberOff < M - 1) {
+                numberOff++;
+                if (!list.isRear(nodeIndex)) {
+                    nodeIndex++;
+                } else {
+                    nodeIndex = 0;
+                }
+            } else {
+                Node<Integer> node = list.getNode(nodeIndex);
+                if (list.isRear(node)) {
+                    nodeIndex = 0;
+                }
+                StdOut.print(node.item + " ");
+                list.removeNode(node);
+                numberOff = 0;
             }
-
-            StdOut.print(list.getNode(i).item + " ");
-            list.removeNode(i);
         }
         StdOut.println();
-//            queue.enqueue(i);
-
-//        while (!queue.isEmpty()) {
-//            for (int i = 0; i < m-1; i++)
-//                queue.enqueue(queue.dequeue());
-//            StdOut.print(queue.dequeue() + " ");
-//        }
-//        StdOut.println();
     }
 }

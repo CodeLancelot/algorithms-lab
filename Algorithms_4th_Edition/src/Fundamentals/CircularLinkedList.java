@@ -30,32 +30,29 @@ public class CircularLinkedList<Type> {
     }
 
     void insertRear(Type item) {
-        Node<Type> oldRear = rear;
-        rear = new Node<>();
-        rear.item = item;
-        if (oldRear != null) {
-            rear.next = head;
-            oldRear.next = rear;
+        int rearIndex = 0;
+        if (size() > 0) {
+            rearIndex = size() - 1;
+            insertAfter(rearIndex, item);
         } else {
+            rear = new Node<>();
+            rear.item = item;
             head = rear;
             rear.next = head;
+            N++;
         }
-        N++;
     }
 
     void insertAfter(int index, Type item) {
         Node<Type> node = getNode(index);
-        if (node == null) {
-            return;
-        }
-        if (node == rear) {
-            insertRear(item);
-        }
-        else {
+        if (node != null) {
             Node<Type> newNode = new Node<>();
             newNode.item = item;
             newNode.next = node.next;
             node.next = newNode;
+            if (node == rear) {
+                rear = newNode;
+            }
             N++;
         }
     }
@@ -74,8 +71,26 @@ public class CircularLinkedList<Type> {
         return null;
     }
 
+    Boolean isRear(Node<Type> node) {
+        if (node != null && rear !=null) {
+            return node == rear;
+        }
+        return false;
+    }
+
+    Boolean isRear(int index) {
+        if (index >= 0) {
+            index = index % N;
+            Node<Type> node = getNode(index);
+            return isRear(node);
+        }
+        return false;
+    }
+
     void removeHead() {
-        if (head == null) {return;}
+        if (head == null) {
+            return;
+        }
         if (head == rear) {
             head = rear = null;
         } else {
@@ -85,25 +100,28 @@ public class CircularLinkedList<Type> {
         N--;
     }
 
-    void removeNode(int index) {
-        Node<Type> node = getNode(index);
+    void removeNode(Node<Type> node) {
         if (node == null || head == null) {
             return;
         }
         if (node == head) {
             removeHead();
-        }
-        else {
+        } else {
             Node<Type> current = head;
             while (current.next != node) {
                 current = current.next;
             }
-            current.next =  node.next;
+            current.next = node.next;
             if (node == rear) {
                 rear = current;
             }
             N--;
         }
+    }
+
+    void removeNode(int index) {
+        Node<Type> node = getNode(index);
+        removeNode(node);
     }
 
     void print() {
