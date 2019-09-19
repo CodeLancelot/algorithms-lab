@@ -34,7 +34,7 @@ public class QuickFind implements UnionFind {
         return count;
     }
 
-    public void printAllComponents() {
+    void printAllComponents() {
         boolean[] printed = new boolean[idArr.length];
         for (int i = 0; i < printed.length; i++) {
             printed[i] = false;
