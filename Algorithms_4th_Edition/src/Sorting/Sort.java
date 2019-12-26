@@ -1,10 +1,6 @@
 package Sorting;
 
 public class Sort {
-    static void sort(Comparable[] arr) {
-        // Sort arr[] into increasing order.
-    }
-
     static boolean less(Comparable v, Comparable w) {
         return v.compareTo(w) < 0;
     }
