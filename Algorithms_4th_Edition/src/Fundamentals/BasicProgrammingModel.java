@@ -21,7 +21,7 @@ public class BasicProgrammingModel {
             }
         }
         Tools.printArray(a);
-        Tools.printTwoDimensionalArray(counts);
+        Tools.printMatrix(counts);
     }
 
     private static void initArray(int[] a) {

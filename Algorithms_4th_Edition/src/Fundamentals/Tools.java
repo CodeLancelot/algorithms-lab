@@ -3,6 +3,18 @@ package Fundamentals;
 import libraries.*;
 
 public class Tools {
+    static void printArray(int[] arr) {
+        StdOut.println();
+        StdOut.print('[');
+        for (int i = 0; i < arr.length; i++) {
+            StdOut.print(arr[i]);
+            if (i != arr.length - 1) {
+                StdOut.print(' ');
+            }
+        }
+        StdOut.println(']');
+    }
+
     static <T> void printArray(T[] arr) {
         StdOut.println();
         StdOut.print('[');
@@ -26,6 +38,23 @@ public class Tools {
             }
         }
         StdOut.println(']');
+    }
+
+    static void printMatrix(int[][] matrix) {
+        int count = matrix[0].length;
+        StdOut.println();
+        StdOut.println();
+        for (int[] row : matrix) {
+            StdOut.print('(');
+            for (int col = 0; col < count; col++) {
+                StdOut.print(row[col]);
+                if (col < count - 1) {
+                    StdOut.print(" ");
+                }
+            }
+            StdOut.println(')');
+        }
+        StdOut.println();
     }
 
     static <T> void printMatrix(T[][] matrix) {
