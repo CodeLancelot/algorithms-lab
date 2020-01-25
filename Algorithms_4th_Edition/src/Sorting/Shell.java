@@ -1,6 +1,9 @@
 package Sorting;
 
 public class Shell extends Sort {
+    private Shell() {
+    }
+
     public static void sort(Comparable[] arr) {
         int N = arr.length;
         int h = 1;
