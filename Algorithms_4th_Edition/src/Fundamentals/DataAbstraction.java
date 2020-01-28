@@ -35,9 +35,6 @@ public class DataAbstraction {
 
     private static boolean cleverSkill(String s, String t) {
         String fullStr = s + s;
-        if (fullStr.contains(t)) {
-            return true;
-        }
-        return false;
+        return fullStr.contains(t);
     }
 }

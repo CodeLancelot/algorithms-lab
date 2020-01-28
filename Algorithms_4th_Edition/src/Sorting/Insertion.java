@@ -1,6 +1,9 @@
 package Sorting;
 
 public class Insertion extends Sort {
+    private Insertion() {
+    }
+
     public static void sort(Comparable[] arr) {
         int N = arr.length;
         for (int i = 1; i < N; i++) {

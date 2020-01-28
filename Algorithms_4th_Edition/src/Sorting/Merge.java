@@ -1,6 +1,8 @@
 package Sorting;
 
 public class Merge extends Sort {
+    private static final int CUTOFF = 7;  // cutoff to insertion sort
+
     private Merge() {
     }
 
@@ -31,11 +33,22 @@ public class Merge extends Sort {
         }
     }
 
+    private static void insertionSort(Comparable[] a, int lo, int hi) {
+        for (int i = lo + 1; i <= hi; i++) {
+            for (int j = i; j > lo && Sort.less(a[j], a[j-1]); j--)
+                Sort.exch(a, j, j-1);
+        }
+    }
+
     private static void topDownSort(Comparable[] a, int lo, int hi, Comparable[] aux) {
-        if (hi <= lo) return;
+        if (hi - lo <= CUTOFF) {
+            insertionSort(a, lo, hi);
+            return;
+        }
         int mid = (lo + hi) / 2;
         topDownSort(a, lo, mid, aux);
         topDownSort(a, mid + 1, hi, aux);
+        if (Sort.less(a[mid], a[mid+1])) return;
         merge(a, lo, mid, hi, aux);
     }
 
