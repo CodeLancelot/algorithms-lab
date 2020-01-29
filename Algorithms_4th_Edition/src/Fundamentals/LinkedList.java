@@ -131,7 +131,69 @@ class LinkedList<Type> {
                 aLast.next = b;
             }
         }
+    }
 
+    private Node<String> merge(Node<String> leftPart, Node<String> rightPart) {
+        Node<String> newHead, newTail;
+        if (leftPart == null) {
+            return rightPart;
+        } else if (rightPart == null) {
+            return leftPart;
+        } else if (leftPart.item.compareTo(rightPart.item) <= 0) {
+            newHead = newTail = leftPart;
+            leftPart = leftPart.next;
+        } else {
+            newHead = newTail = rightPart;
+            rightPart = rightPart.next;
+        }
+
+        while (leftPart != null && rightPart != null) {
+            if (leftPart.item.compareTo(rightPart.item) <= 0) {
+                newTail.next = leftPart;
+                newTail = newTail.next;
+                leftPart = leftPart.next;
+            }
+            else {
+                newTail.next = rightPart;
+                newTail = newTail.next;
+                rightPart = rightPart.next;
+            }
+        }
+
+        if (leftPart != null) {
+            newTail.next = leftPart;
+        }
+        if (rightPart != null) {
+            newTail.next = rightPart;
+        }
+        return newHead;
+    }
+
+    private Node<String> mergeSort(Node<String> head) {
+        if (head.next == null) return head;
+        Node<String> slow = head, fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        Node<String> rHead = slow.next;
+        slow.next = null;
+        Node<String> l = mergeSort(head);
+        Node<String> r = mergeSort(rHead);
+        return merge(l, r);
+    }
+
+    Node<String> sort(Node<String> head) {
+        if (head == null || head.next == null) return head;
+        return mergeSort(head);
+    }
+
+    void printNode(Node node) {
+        while (node != null) {
+            StdOut.print(node.item + " -> ");
+            node = node.next;
+        }
+        StdOut.println("NULL");
     }
 
     void print() {
@@ -179,6 +241,8 @@ class LinkedList<Type> {
         list.exchange(5, 6);
         list.exchange(1, 3);
         list.exchange(2, 15);
+        list.print();
+        list.first = list.sort(list.first);
         list.print();
     }
 }
