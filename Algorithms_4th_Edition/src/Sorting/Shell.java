@@ -1,5 +1,8 @@
 package Sorting;
 
+import Fundamentals.Tools;
+import libraries.*;
+
 public class Shell extends Sort {
     private Shell() {
     }
@@ -15,5 +18,16 @@ public class Shell extends Sort {
             }
             h /= 3;
         }
+    }
+
+    public static void main(String[] args) {
+        int N = Integer.parseInt(args[0]);
+        Integer[] a = new Integer[N];
+        for (int i = 0; i < N; i++)
+            a[i] = StdRandom.uniform(N);
+
+        sort(a);
+        assert Sort.isSorted(a);
+        Tools.printArray(a);
     }
 }

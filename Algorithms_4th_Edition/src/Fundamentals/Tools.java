@@ -15,7 +15,7 @@ public class Tools {
         StdOut.println(']');
     }
 
-    static <T> void printArray(T[] arr) {
+    public static <T> void printArray(T[] arr) {
         StdOut.println();
         StdOut.print('[');
         for (int i = 0; i < arr.length; i++) {
@@ -27,7 +27,7 @@ public class Tools {
         StdOut.println(']');
     }
 
-    static void printArray(double[] arr, int precision) {
+    public static void printArray(double[] arr, int precision) {
         StdOut.println();
         StdOut.print('[');
         for (int i = 0; i < arr.length; i++) {

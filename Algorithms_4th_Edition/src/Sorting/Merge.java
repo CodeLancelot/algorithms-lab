@@ -1,5 +1,8 @@
 package Sorting;
 
+import Fundamentals.Tools;
+import libraries.*;
+
 public class Merge extends Sort {
     private static final int CUTOFF = 7;  // cutoff to insertion sort
 
@@ -33,22 +36,15 @@ public class Merge extends Sort {
         }
     }
 
-    private static void insertionSort(Comparable[] a, int lo, int hi) {
-        for (int i = lo + 1; i <= hi; i++) {
-            for (int j = i; j > lo && Sort.less(a[j], a[j-1]); j--)
-                Sort.exch(a, j, j-1);
-        }
-    }
-
     private static void topDownSort(Comparable[] a, int lo, int hi, Comparable[] aux) {
         if (hi - lo <= CUTOFF) {
-            insertionSort(a, lo, hi);
+            Insertion.sort(a, lo, hi);
             return;
         }
         int mid = (lo + hi) / 2;
         topDownSort(a, lo, mid, aux);
         topDownSort(a, mid + 1, hi, aux);
-        if (Sort.less(a[mid], a[mid+1])) return;
+        if (Sort.less(a[mid], a[mid + 1])) return;
         merge(a, lo, mid, hi, aux);
     }
 
@@ -66,5 +62,16 @@ public class Merge extends Sort {
     enum DivideAndConquer {
         TOP_DOWN,
         BOTTOM_UP
+    }
+
+    public static void main(String[] args) {
+        int N = Integer.parseInt(args[0]);
+        Integer[] a = new Integer[N];
+        for (int i = 0; i < N; i++)
+            a[i] = StdRandom.uniform(N);
+
+        sort(a, DivideAndConquer.BOTTOM_UP);
+        assert Sort.isSorted(a);
+        Tools.printArray(a);
     }
 }
