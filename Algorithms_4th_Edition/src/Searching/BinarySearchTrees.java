@@ -247,8 +247,8 @@ public class BinarySearchTrees<Key extends Comparable<Key>, Value> {
 
     // Returns the keys in the BST in level order (for debugging).
     public Iterable<Key> levelOrder() {
-        Queue<Key> keys = new Queue<Key>();
-        Queue<Node> queue = new Queue<Node>();
+        Queue<Key> keys = new Queue<>();
+        Queue<Node> queue = new Queue<>();
         queue.enqueue(root);
         while (!queue.isEmpty()) {
             Node x = queue.dequeue();
