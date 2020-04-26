@@ -3,16 +3,11 @@ package Fundamentals;
 import java.util.Iterator;
 
 public class Bag<Item> implements Iterable<Item> {
-    private Node first; // first node in list
-
-    private class Node {
-        Item item;
-        Node next;
-    }
+    private Node<Item> first; // first node in list
 
     public void add(Item item) {
-        Node oldFirst = first;
-        first = new Node();
+        Node<Item> oldFirst = first;
+        first = new Node<Item>();
         first.item = item;
         first.next = oldFirst;
     }
@@ -22,7 +17,7 @@ public class Bag<Item> implements Iterable<Item> {
     }
 
     private class ListIterator implements Iterator<Item> {
-        private Node current = first;
+        private Node<Item> current = first;
 
         public boolean hasNext() {
             return current != null;
