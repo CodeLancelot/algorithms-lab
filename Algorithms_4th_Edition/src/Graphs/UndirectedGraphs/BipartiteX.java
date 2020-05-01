@@ -32,7 +32,7 @@ public class BipartiteX {
         color[s] = WHITE;
         Queue<Integer> queue = new Queue<>();
         queue.enqueue(s);
-        while (!queue.isEmpty()) {
+        while (!queue.isEmpty() && isBipartite()) {
             int v = queue.dequeue();
             for (int w : G.adj(v)) {
                 if (!marked[w]) {

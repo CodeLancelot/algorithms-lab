@@ -46,6 +46,24 @@ public class Graph {
         return adj[v];
     }
 
+    public int degree(int v) {
+        int degree = 0;
+        for (int w : adj(v)) degree++;
+        return degree;
+    }
+
+    public int maxDegree() {
+        int max = 0;
+        for (int v = 0; v < V(); v++)
+            if (degree(v) > max)
+                max = degree(v);
+        return max;
+    }
+
+    public int avgDegree() {
+        return 2 * E() / V();
+    }
+
     public String toString() {
         String s = V + " vertices, " + E + " edges\n";
         for (int v = 0; v < V; v++) {
