@@ -37,8 +37,11 @@ public class Graph {
     }
 
     public void addEdge(int v, int w) {
-        adj[v].add(w); // Add w to v’s list.
-        adj[w].add(v); // Add v to w’s list.
+        if (v == w) adj[v].add(v);
+        else {
+            adj[v].add(w); // Add w to v’s list.
+            adj[w].add(v); // Add v to w’s list.
+        }
         E++;
     }
 
@@ -48,7 +51,10 @@ public class Graph {
 
     public int degree(int v) {
         int degree = 0;
-        for (int w : adj(v)) degree++;
+        for (int w : adj(v)) {
+            if (v != w) degree++;
+            else degree = degree + 2;
+        }
         return degree;
     }
 
