@@ -4,12 +4,18 @@ import java.util.Iterator;
 
 public class Bag<Item> implements Iterable<Item> {
     private Node<Item> first; // first node in list
+    private int size = 0;
+
+    public int size() {
+        return size;
+    }
 
     public void add(Item item) {
         Node<Item> oldFirst = first;
         first = new Node<>();
         first.item = item;
         first.next = oldFirst;
+        size++;
     }
 
     public Iterator<Item> iterator() {
@@ -21,9 +27,6 @@ public class Bag<Item> implements Iterable<Item> {
 
         public boolean hasNext() {
             return current != null;
-        }
-
-        public void remove() {
         }
 
         public Item next() {
