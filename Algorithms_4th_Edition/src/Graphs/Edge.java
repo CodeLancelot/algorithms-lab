@@ -1,6 +1,8 @@
-package Graphs.UndirectedGraphs;
+package Graphs;
 
 import Fundamentals.Queue;
+import Graphs.UndirectedGraphs.Graph;
+import Graphs.DirectedGraphs.Digraph;
 
 public class Edge {
     private final int v;
@@ -20,7 +22,7 @@ public class Edge {
         else throw new IllegalArgumentException("Illegal endpoint");
     }
 
-    // create adjacency lists
+    // create adjacency lists for Undirected Graph
     public static Queue<Edge>[] adjOfEdges(Graph G) {
         Queue<Edge>[] adj = (Queue<Edge>[]) new Queue[G.V()];
         for (int v = 0; v < G.V(); v++)
@@ -35,6 +37,20 @@ public class Edge {
                     adj[v].enqueue(e);
                     adj[w].enqueue(e);
                 }
+            }
+        }
+        return adj;
+    }
+
+    // create adjacency lists for Directed Graph
+    public static Queue<Edge>[] adjOfEdges(Digraph G) {
+        Queue<Edge>[] adj = (Queue<Edge>[]) new Queue[G.V()];
+        for (int v = 0; v < G.V(); v++)
+            adj[v] = new Queue<>();
+        for (int v = 0; v < G.V(); v++) {
+            for (int w : G.adj(v)) {
+                Edge e = new Edge(v, w);
+                adj[v].enqueue(e);
             }
         }
         return adj;

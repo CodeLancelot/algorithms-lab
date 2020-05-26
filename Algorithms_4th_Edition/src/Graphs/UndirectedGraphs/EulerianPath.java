@@ -2,6 +2,7 @@ package Graphs.UndirectedGraphs;
 
 import Fundamentals.Queue;
 import Fundamentals.Stack;
+import Graphs.Edge;
 import libraries.StdOut;
 
 /**

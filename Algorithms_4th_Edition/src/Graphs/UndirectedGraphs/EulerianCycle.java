@@ -2,10 +2,11 @@ package Graphs.UndirectedGraphs;
 
 import Fundamentals.Queue;
 import Fundamentals.Stack;
+import Graphs.Edge;
 import libraries.StdOut;
 
 public class EulerianCycle {
-    private Stack<Integer> cycle = new Stack<Integer>();
+    private Stack<Integer> cycle = new Stack<>();
 
     public EulerianCycle(Graph G) {
         if (!hasMatchedPreconditions(G)) return;
@@ -56,9 +57,7 @@ public class EulerianCycle {
                 StdOut.print(v + " ");
             }
             StdOut.println();
-        } else {
-            StdOut.println("NOT EXISTS");
-        }
+        } else StdOut.println("NOT EXISTS");
     }
 
     public static void main(String[] args) {
