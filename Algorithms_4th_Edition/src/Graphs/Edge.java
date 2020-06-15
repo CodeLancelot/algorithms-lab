@@ -3,16 +3,34 @@ package Graphs;
 import Fundamentals.Queue;
 import Graphs.UndirectedGraphs.Graph;
 import Graphs.DirectedGraphs.Digraph;
+import libraries.StdOut;
 
-public class Edge {
+public class Edge implements Comparable<Edge> {
     private final int v;
     private final int w;
+    private final double weight;
     public boolean isUsed;
 
     public Edge(int v, int w) {
         this.v = v;
         this.w = w;
+        this.weight = 0;
         isUsed = false;
+    }
+
+    public Edge(int v, int w, double weight) {
+        this.v = v;
+        this.w = w;
+        this.weight = weight;
+        isUsed = false;
+    }
+
+    public double weight() {
+        return weight;
+    }
+
+    public int either() {
+        return v;
     }
 
     // returns the other vertex of the edge
@@ -20,6 +38,14 @@ public class Edge {
         if (vertex == v) return w;
         else if (vertex == w) return v;
         else throw new IllegalArgumentException("Illegal endpoint");
+    }
+
+    public int compareTo(Edge that) {
+        return Double.compare(this.weight, that.weight);
+    }
+
+    public String toString() {
+        return String.format("%d-%d %.3f", v, w, weight);
     }
 
     // create adjacency lists for Undirected Graph
@@ -54,5 +80,10 @@ public class Edge {
             }
         }
         return adj;
+    }
+
+    public static void main(String[] args) {
+        Edge edge = new Edge(1, 8, 5.67);
+        StdOut.println(edge);
     }
 }
