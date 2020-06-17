@@ -7,7 +7,7 @@ public class WeightedQuickUnion implements UnionFind {
     private int[] sizes;
     private int count;
 
-    WeightedQuickUnion(int N) {
+    public WeightedQuickUnion(int N) {
         count = N;
         links = new int[N];
         sizes = new int[N];
