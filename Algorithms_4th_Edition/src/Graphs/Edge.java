@@ -2,8 +2,6 @@ package Graphs;
 
 import Fundamentals.Queue;
 import Graphs.UndirectedGraphs.Graph;
-import Graphs.DirectedGraphs.Digraph;
-import libraries.StdOut;
 
 public class Edge implements Comparable<Edge> {
     private final int v;
@@ -66,24 +64,5 @@ public class Edge implements Comparable<Edge> {
             }
         }
         return adj;
-    }
-
-    // create adjacency lists for Directed Graph
-    public static Queue<Edge>[] adjOfEdges(Digraph G) {
-        Queue<Edge>[] adj = (Queue<Edge>[]) new Queue[G.V()];
-        for (int v = 0; v < G.V(); v++)
-            adj[v] = new Queue<>();
-        for (int v = 0; v < G.V(); v++) {
-            for (int w : G.adj(v)) {
-                Edge e = new Edge(v, w);
-                adj[v].enqueue(e);
-            }
-        }
-        return adj;
-    }
-
-    public static void main(String[] args) {
-        Edge edge = new Edge(1, 8, 5.67);
-        StdOut.println(edge);
     }
 }

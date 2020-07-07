@@ -2,7 +2,7 @@ package Graphs.DirectedGraphs;
 
 import Fundamentals.Queue;
 import Fundamentals.Stack;
-import Graphs.Edge;
+import Graphs.DirectedEdge;
 import Graphs.UndirectedGraphs.ConnectedComponents;
 import Graphs.UndirectedGraphs.Graph;
 import libraries.StdOut;
@@ -12,7 +12,7 @@ public class EulerianPath {
 
     public EulerianPath(Digraph G) {
         if (!hasMatchedPreconditions(G)) return;
-        Queue<Edge>[] adj = Edge.adjOfEdges(G);
+        Queue<DirectedEdge>[] adj = DirectedEdge.adjOfEdges(G);
         int s = 0;
         for (int v = 0; v < G.V(); v++) {
             if (G.outdegree(v) - G.indegree(v) == 1) {
@@ -27,9 +27,9 @@ public class EulerianPath {
         while (!stack.isEmpty()) {
             int v = stack.pop();
             while (!adj[v].isEmpty()) {
-                Edge edge = adj[v].dequeue();
+                DirectedEdge edge = adj[v].dequeue();
                 stack.push(v);
-                v = edge.other(v);
+                v = edge.to();
             }
             path.push(v);
         }
