@@ -2,6 +2,8 @@ package Graphs.DirectedGraphs;
 
 import Fundamentals.Queue;
 import Fundamentals.Stack;
+import Graphs.DirectedEdge;
+import Graphs.EdgeWeightedDigraphs.EdgeWeightedDigraph;
 import libraries.In;
 import libraries.StdOut;
 
@@ -31,7 +33,29 @@ public class DepthFirstOrder {
         marked[v] = true;
         preorder.enqueue(v);
         preIndex[v] = preCounter++;
-        for (int w : G.adj(v)) {
+        for (int w : G.adj(v))
+            if (!marked[w]) dfs(G, w);
+        postorder.enqueue(v);
+        postIndex[v] = postCounter++;
+    }
+
+    public DepthFirstOrder(EdgeWeightedDigraph G) {
+        marked = new boolean[G.V()];
+        preIndex = new int[G.V()];
+        postIndex = new int[G.V()];
+        postorder = new Queue<>();
+        preorder = new Queue<>();
+        for (int v = 0; v < G.V(); v++)
+            if (!marked[v]) dfs(G, v);
+        assert check();
+    }
+
+    private void dfs(EdgeWeightedDigraph G, int v) {
+        marked[v] = true;
+        preorder.enqueue(v);
+        preIndex[v] = preCounter++;
+        for (DirectedEdge edge : G.adj(v)) {
+            int w = edge.to();
             if (!marked[w]) dfs(G, w);
         }
         postorder.enqueue(v);
@@ -89,26 +113,22 @@ public class DepthFirstOrder {
             DepthFirstOrder dfs = new DepthFirstOrder(G);
             StdOut.println("   v  pre post");
             StdOut.println("--------------");
-            for (int v = 0; v < G.V(); v++) {
+            for (int v = 0; v < G.V(); v++)
                 StdOut.printf("%4d %4d %4d\n", v, dfs.preIndex(v), dfs.postIndex(v));
-            }
 
             StdOut.print("Preorder:  ");
-            for (int v : dfs.pre()) {
+            for (int v : dfs.pre())
                 StdOut.print(v + " ");
-            }
             StdOut.println();
 
             StdOut.print("Postorder: ");
-            for (int v : dfs.post()) {
+            for (int v : dfs.post())
                 StdOut.print(v + " ");
-            }
             StdOut.println();
 
             StdOut.print("Reverse postorder: ");
-            for (int v : dfs.reversePost()) {
+            for (int v : dfs.reversePost())
                 StdOut.print(v + " ");
-            }
             StdOut.println();
         } catch (Exception e) {
             e.printStackTrace();

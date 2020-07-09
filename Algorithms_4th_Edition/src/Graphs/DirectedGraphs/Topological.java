@@ -1,5 +1,6 @@
 package Graphs.DirectedGraphs;
 
+import Graphs.EdgeWeightedDigraphs.EdgeWeightedDigraph;
 import libraries.StdOut;
 
 import java.net.URL;
@@ -16,7 +17,20 @@ public class Topological {
             order = dfo.reversePost();
             rank = new int[G.V()];
             int i = 0;
-            for (int v : order) rank[v] = i++;
+            for (int v : order)
+                rank[v] = i++;
+        }
+    }
+
+    public Topological(EdgeWeightedDigraph G) {
+        Graphs.EdgeWeightedDigraphs.Cycle cycleFinder = new Graphs.EdgeWeightedDigraphs.Cycle(G);
+        if (!cycleFinder.hasCycle()) {
+            DepthFirstOrder dfo = new DepthFirstOrder(G);
+            order = dfo.reversePost();
+            rank = new int[G.V()];
+            int i = 0;
+            for (int v : order)
+                rank[v] = i++;
         }
     }
 
