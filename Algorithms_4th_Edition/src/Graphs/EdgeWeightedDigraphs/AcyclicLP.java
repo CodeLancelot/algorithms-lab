@@ -68,11 +68,11 @@ public class AcyclicLP {
             EdgeWeightedDigraph G = new EdgeWeightedDigraph(in);
             int s = Integer.parseInt(args[0]);
             // find longest path from s to each other vertex in DAG
-            AcyclicLP sp = new AcyclicLP(G, s);
+            AcyclicLP lp = new AcyclicLP(G, s);
             for (int v = 0; v < G.V(); v++) {
-                if (sp.hasPathTo(v)) {
-                    StdOut.printf("%d to %d (%.2f)  ", s, v, sp.distTo(v));
-                    for (DirectedEdge e : sp.pathTo(v)) {
+                if (lp.hasPathTo(v)) {
+                    StdOut.printf("%d to %d (%.2f)  ", s, v, lp.distTo(v));
+                    for (DirectedEdge e : lp.pathTo(v)) {
                         StdOut.print(e + "   ");
                     }
                     StdOut.println();

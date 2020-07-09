@@ -9,7 +9,7 @@ public class Topological {
     private Iterable<Integer> order; // topological order
     private int[] rank; // rank[v] = rank of vertex v in order
 
-    // A digraph has a topological order if and only if it is a DAG.
+    // A digraph has a topological order if and only if it is a DAG(Directed Acyclic Graph).
     public Topological(Digraph G) {
         Cycle cycleFinder = new Cycle(G);
         if (!cycleFinder.hasCycle()) {
@@ -44,7 +44,8 @@ public class Topological {
 
     private void validateVertex(int v) {
         int V = rank.length;
-        if (v < 0 || v >= V) throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
+        if (v < 0 || v >= V)
+            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
     }
 
     public int rank(int v) {
