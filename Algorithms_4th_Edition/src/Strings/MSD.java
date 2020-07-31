@@ -39,7 +39,7 @@ public class MSD {
         for (int i = lo; i <= hi; i++)
             a[i] = aux[i];
         // Recursively sort for each character value.
-        for (int r = 1; r < R + 1; r++)
+        for (int r = 0; r < R; r++)
             sort(a, lo + count[r], lo + count[r + 1] - 1, d + 1);
     }
 
