@@ -36,11 +36,11 @@ public class TrieST<Value> {
         return (Value) x.val;
     }
 
-    private Node get(Node treeRoot, String key, int d) {
-        if (treeRoot == null) return null;
-        if (d == key.length()) return treeRoot;
+    private Node get(Node trie, String key, int d) {
+        if (trie == null) return null;
+        if (d == key.length()) return trie;
         char c = key.charAt(d);
-        return get(treeRoot.next[c], key, d + 1);
+        return get(trie.next[c], key, d + 1);
     }
 
     public boolean contains(String key) {
@@ -54,16 +54,16 @@ public class TrieST<Value> {
         root = put(root, key, val, 0);
     }
 
-    private Node put(Node treeRoot, String key, Value val, int d) {
-        if (treeRoot == null) treeRoot = new Node();
+    private Node put(Node trie, String key, Value val, int d) {
+        if (trie == null) trie = new Node();
         if (d == key.length()) {
-            treeRoot.val = val;
+            trie.val = val;
             n++;
         } else {
             char c = key.charAt(d);
-            treeRoot.next[c] = put(treeRoot.next[c], key, val, d + 1);
+            trie.next[c] = put(trie.next[c], key, val, d + 1);
         }
-        return treeRoot;
+        return trie;
     }
 
     public void delete(String key) {
@@ -71,28 +71,28 @@ public class TrieST<Value> {
         root = delete(root, key, 0);
     }
 
-    private Node delete(Node treeRoot, String key, int d) {
-        if (treeRoot == null) return null;
+    private Node delete(Node trie, String key, int d) {
+        if (trie == null) return null;
         if (d == key.length()) {
-            treeRoot.val = null;
+            trie.val = null;
             n--;
         } else {
             char c = key.charAt(d);
-            treeRoot.next[c] = delete(treeRoot.next[c], key, d + 1);
+            trie.next[c] = delete(trie.next[c], key, d + 1);
         }
-        if (treeRoot.val != null) return treeRoot;
+        if (trie.val != null) return trie;
         for (int c = 0; c < R; c++) {
-            if (treeRoot.next[c] != null) return treeRoot;
+            if (trie.next[c] != null) return trie;
         }
         return null;
     }
 
-    private void collect(Node treeRoot, String prefix, Queue<String> keys) {
-        if (treeRoot == null) return;
-        if (treeRoot.val != null)
+    private void collect(Node trie, String prefix, Queue<String> keys) {
+        if (trie == null) return;
+        if (trie.val != null)
             keys.enqueue(prefix);
         for (char c = 0; c < R; c++)
-            collect(treeRoot.next[c], prefix + c, keys);
+            collect(trie.next[c], prefix + c, keys);
     }
 
     public Iterable<String> keysWithPrefix(String prefix) {
@@ -106,16 +106,16 @@ public class TrieST<Value> {
         return keysWithPrefix("");
     }
 
-    private void collect(Node treeRoot, String prefix, String pattern, Queue<String> keys) {
-        if (treeRoot == null) return;
+    private void collect(Node trie, String prefix, String pattern, Queue<String> keys) {
+        if (trie == null) return;
         int d = prefix.length();
-        if (d == pattern.length() && treeRoot.val != null) keys.enqueue(prefix);
+        if (d == pattern.length() && trie.val != null) keys.enqueue(prefix);
         else if (d < pattern.length()) {
             char ch = pattern.charAt(d);
             if (ch == '.') {
                 for (char c = 0; c < R; c++)
-                    collect(treeRoot.next[c], prefix + c, pattern, keys);
-            } else collect(treeRoot.next[ch], prefix + ch, pattern, keys);
+                    collect(trie.next[c], prefix + c, pattern, keys);
+            } else collect(trie.next[ch], prefix + ch, pattern, keys);
         }
     }
 
@@ -133,12 +133,12 @@ public class TrieST<Value> {
     }
 
     // assuming the first d character match and we have already found a prefix match of given length (-1 if no such match)
-    private int longestPrefixOf(Node treeRoot, String query, int d, int length) {
-        if (treeRoot == null) return length;
-        if (treeRoot.val != null) length = d;
+    private int longestPrefixOf(Node trie, String query, int d, int length) {
+        if (trie == null) return length;
+        if (trie.val != null) length = d;
         if (d == query.length()) return length;
         char c = query.charAt(d);
-        return longestPrefixOf(treeRoot.next[c], query, d + 1, length);
+        return longestPrefixOf(trie.next[c], query, d + 1, length);
     }
 
     public static void main(String[] args) {
@@ -159,12 +159,12 @@ public class TrieST<Value> {
             StdOut.println(st.longestPrefixOf("shellsort"));
             StdOut.println();
 
-            StdOut.println("longestPrefixOf(\"quicksort\"):");
-            StdOut.println(st.longestPrefixOf("quicksort"));
+            StdOut.println("longestPrefixOf(\"shake\"):");
+            StdOut.println(st.longestPrefixOf("shake"));
             StdOut.println();
 
-            StdOut.println("keysWithPrefix(\"shor\"):");
-            for (String s : st.keysWithPrefix("shor"))
+            StdOut.println("keysWithPrefix(\"sh\"):");
+            for (String s : st.keysWithPrefix("sh"))
                 StdOut.println(s);
             StdOut.println();
 
