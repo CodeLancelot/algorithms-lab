@@ -9,7 +9,7 @@ public class DepthFirstSearch {
     private boolean[] marked;
     private int count;
 
-    DepthFirstSearch(Digraph G, int s) {
+    public DepthFirstSearch(Digraph G, int s) {
         marked = new boolean[G.V()];
         dfs(G, s);
     }
